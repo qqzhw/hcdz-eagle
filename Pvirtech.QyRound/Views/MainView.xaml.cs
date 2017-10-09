@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace Pvirtech.QyRound.Views
 {
 	/// <summary>
-	/// MainView.xaml 的交互逻辑  11
+	/// MainView.xaml 的交互逻辑
 	/// </summary>
 	public partial class MainView : UserControl
 	{
