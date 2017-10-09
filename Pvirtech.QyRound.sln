@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pvirtech.QyRound", "Pvirtech.QyRound\Pvirtech.QyRound.csproj", "{682E1104-84FF-46FC-869A-0BBEEA66E144}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pvirtech.Metro", "Pvirtech.Metro\Pvirtech.Metro.csproj", "{1A8F5E0B-5EA8-4C04-9F1B-1482D08F878A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pvirtech.QyRound.Core", "Pvirtech.QyRound.Core\Pvirtech.QyRound.Core.csproj", "{1052CEE2-1805-4EA8-A85F-CAD3A5285C7C}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{682E1104-84FF-46FC-869A-0BBEEA66E144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{682E1104-84FF-46FC-869A-0BBEEA66E144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{682E1104-84FF-46FC-869A-0BBEEA66E144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{682E1104-84FF-46FC-869A-0BBEEA66E144}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8F5E0B-5EA8-4C04-9F1B-1482D08F878A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8F5E0B-5EA8-4C04-9F1B-1482D08F878A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8F5E0B-5EA8-4C04-9F1B-1482D08F878A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8F5E0B-5EA8-4C04-9F1B-1482D08F878A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1052CEE2-1805-4EA8-A85F-CAD3A5285C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1052CEE2-1805-4EA8-A85F-CAD3A5285C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1052CEE2-1805-4EA8-A85F-CAD3A5285C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1052CEE2-1805-4EA8-A85F-CAD3A5285C7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
