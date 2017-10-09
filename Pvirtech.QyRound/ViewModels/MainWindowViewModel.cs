@@ -89,15 +89,22 @@ namespace Pvirtech.QyRound.ViewModels
 			_systemInfos.Add(new SystemInfoViewModel()
 			{
 				Id = "MainView",
-				Title = "数据分析",
+				Title = "绕圈分析",
 				InitMode = InitializationMode.OnDemand,
 				IsDefaultShow = true,
 				IsSelected = true,
 			}); 
 			_systemInfos.Add(new SystemInfoViewModel()
 			{
-				Id = "FilesView",
-				Title = "文件管理",
+				Id = "BanAnalysisView",
+				Title = "禁入分析",
+				InitMode = InitializationMode.OnDemand,
+				IsDefaultShow = false,
+			});
+			_systemInfos.Add(new SystemInfoViewModel()
+			{
+				Id = "ParkAnalysisView",
+				Title = "停车场分析",
 				InitMode = InitializationMode.OnDemand,
 				IsDefaultShow = false,
 			});

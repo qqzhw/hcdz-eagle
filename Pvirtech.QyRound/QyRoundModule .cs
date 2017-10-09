@@ -17,15 +17,15 @@ namespace Pvirtech.QyRound
             _unityContainer = unityContainer;
 			 
 		}
-		 
+
 
 		public void Initialize()
-        {
-            _regionManager.RegisterViewWithRegion("MainRegion", typeof(MainView));
-           _unityContainer.RegisterTypeForNavigation<MainView>("MainView"); 
-         //   _unityContainer.RegisterTypeForNavigation<FilesView>("FilesView");
-           // _unityContainer.RegisterTypeForNavigation<SettingsView>("SettingsView");
-
-        }
+		{
+			_regionManager.RegisterViewWithRegion("MainRegion", typeof(MainView));
+			_unityContainer.RegisterTypeForNavigation<MainView>("MainView");
+			_unityContainer.RegisterTypeForNavigation<BanAnalysisView>("BanAnalysisView");
+			_unityContainer.RegisterTypeForNavigation<ParkAnalysisView>("ParkAnalysisView");
+			_unityContainer.RegisterTypeForNavigation<SettingsView>("SettingsView");
+		}
     }
 }
