@@ -135,7 +135,7 @@ namespace Pvirtech.QyRound.ViewModels
 
 		private void navigationCallback(NavigationResult result)
 		{
-			var s = result;
+			 
 		}
 		  
 	}
