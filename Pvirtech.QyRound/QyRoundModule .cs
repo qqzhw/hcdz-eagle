@@ -1,4 +1,4 @@
-﻿
+
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Regions;
@@ -23,8 +23,8 @@ namespace Pvirtech.QyRound
 		{
 			_regionManager.RegisterViewWithRegion("MainRegion", typeof(MainView));
 			_unityContainer.RegisterTypeForNavigation<MainView>("MainView");
-			_unityContainer.RegisterTypeForNavigation<BanAnalysisView>("BanAnalysisView");
-			_unityContainer.RegisterTypeForNavigation<ParkAnalysisView>("ParkAnalysisView");
+			//_unityContainer.RegisterTypeForNavigation<BanAnalysisView>("BanAnalysisView");
+			//_unityContainer.RegisterTypeForNavigation<ParkAnalysisView>("ParkAnalysisView");
 			_unityContainer.RegisterTypeForNavigation<SettingsView>("SettingsView");
 		}
     }

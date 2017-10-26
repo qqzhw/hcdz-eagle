@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Prism.Commands;
 using Prism.Events;
@@ -19,7 +19,7 @@ namespace Pvirtech.QyRound.ViewModels
  
 	public class MainWindowViewModel : BindableBase
 	{
-		private string _title = "青羊公安绕圈分析平台";
+		private string _title = "上位机程序";
 		public string Title
 		{
 			get { return _title; }
@@ -89,25 +89,25 @@ namespace Pvirtech.QyRound.ViewModels
 			_systemInfos.Add(new SystemInfoViewModel()
 			{
 				Id = "MainView",
-				Title = "绕圈分析",
+				Title = "控制平台",
 				InitMode = InitializationMode.OnDemand,
 				IsDefaultShow = true,
 				IsSelected = true,
 			}); 
-			_systemInfos.Add(new SystemInfoViewModel()
-			{
-				Id = "BanAnalysisView",
-				Title = "禁入分析",
-				InitMode = InitializationMode.OnDemand,
-				IsDefaultShow = false,
-			});
-			_systemInfos.Add(new SystemInfoViewModel()
-			{
-				Id = "ParkAnalysisView",
-				Title = "停车场分析",
-				InitMode = InitializationMode.OnDemand,
-				IsDefaultShow = false,
-			});
+			//_systemInfos.Add(new SystemInfoViewModel()
+			//{
+			//	Id = "BanAnalysisView",
+			//	Title = "禁入分析",
+			//	InitMode = InitializationMode.OnDemand,
+			//	IsDefaultShow = false,
+			//});
+			//_systemInfos.Add(new SystemInfoViewModel()
+			//{
+			//	Id = "ParkAnalysisView",
+			//	Title = "停车场分析",
+			//	InitMode = InitializationMode.OnDemand,
+			//	IsDefaultShow = false,
+			//});
 			_systemInfos.Add(new SystemInfoViewModel()
 			{
 				Id = "SettingsView",

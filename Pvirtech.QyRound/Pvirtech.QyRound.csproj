@@ -23,6 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -91,6 +93,30 @@
     </ApplicationDefinition>
     <Compile Include="Controls\HeaderControl.cs" />
     <Compile Include="QyRoundModule .cs" />
+    <Compile Include="SDK\BITS.cs" />
+    <Compile Include="SDK\Class1.cs" />
+    <Compile Include="SDK\CONTROL_TYPE.cs" />
+    <Compile Include="SDK\DATA_SOURCE_TYPE.cs" />
+    <Compile Include="SDK\DISK_MOUNT_TYPE.cs" />
+    <Compile Include="SDK\EagleData_CcdRecord.cs" />
+    <Compile Include="SDK\EagleData_CcdRecord_Id.cs" />
+    <Compile Include="SDK\EagleData_Record.cs" />
+    <Compile Include="SDK\EagleData_Record_Id.cs" />
+    <Compile Include="SDK\eagle_all_netcards.cs" />
+    <Compile Include="SDK\eagle_camera_config.cs" />
+    <Compile Include="SDK\eagle_camera_disk_config.cs" />
+    <Compile Include="SDK\eagle_camera_line_staus.cs" />
+    <Compile Include="SDK\eagle_capture_config.cs" />
+    <Compile Include="SDK\eagle_disk_total_volume.cs" />
+    <Compile Include="SDK\eagle_netcard_info.cs" />
+    <Compile Include="SDK\EAGLE_SDK_STATUS.cs" />
+    <Compile Include="SDK\eagle_system_status.cs" />
+    <Compile Include="SDK\eagle_trigger_frequency_config.cs" />
+    <Compile Include="SDK\ECaptureStatusType.cs" />
+    <Compile Include="SDK\EDeviceType.cs" />
+    <Compile Include="SDK\FrameHead.cs" />
+    <Compile Include="SDK\PIXEL_SAMPLING_TYPE.cs" />
+    <Compile Include="SDK\SDKApi.cs" />
     <Compile Include="Services\QyRoundService.cs" />
     <Compile Include="Services\IQyRoundService.cs" />
     <Compile Include="ViewModels\BanAnalysisViewModel.cs" />

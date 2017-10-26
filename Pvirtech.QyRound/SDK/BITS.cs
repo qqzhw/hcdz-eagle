@@ -1,0 +1,40 @@
+using System;
+
+namespace Pvirtech.QyRound.SDK
+{
+	public enum BITS : uint
+	{
+		BIT31 = 2147483648u,
+		BIT30 = 1073741824u,
+		BIT29 = 536870912u,
+		BIT28 = 268435456u,
+		BIT27 = 134217728u,
+		BIT26 = 67108864u,
+		BIT25 = 33554432u,
+		BIT24 = 16777216u,
+		BIT23 = 8388608u,
+		BIT22 = 4194304u,
+		BIT21 = 2097152u,
+		BIT20 = 1048576u,
+		BIT19 = 524288u,
+		BIT18 = 262144u,
+		BIT17 = 131072u,
+		BIT16 = 65536u,
+		BIT15 = 32768u,
+		BIT14 = 16384u,
+		BIT13 = 8192u,
+		BIT12 = 4096u,
+		BIT11 = 2048u,
+		BIT10 = 1024u,
+		BIT9 = 512u,
+		BIT8 = 256u,
+		BIT7 = 128u,
+		BIT6 = 64u,
+		BIT5 = 32u,
+		BIT4 = 16u,
+		BIT3 = 8u,
+		BIT2 = 4u,
+		BIT1 = 2u,
+		BIT0 = 1u
+	}
+}
