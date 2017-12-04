@@ -125,7 +125,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\ByteFormatter.cs" />
     <Compile Include="Common\CommonByte.cs" />
+    <Compile Include="Common\CommonHelper.cs" />
     <Compile Include="Controls\HeaderControl.cs" />
     <Compile Include="Converters\TrueToColorConverter.cs" />
     <Compile Include="QyRoundModule .cs" />
@@ -162,6 +164,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ParkAnalysisViewModel.cs" />
+    <Compile Include="ViewModels\RadioViewModel.cs" />
     <Compile Include="ViewModels\SDKViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\SystemInfoViewModel.cs" />

@@ -7,6 +7,8 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:metro="http://metro.pvirtech.com/winfx/xaml/controls"
              xmlns:convert="clr-namespace:Pvirtech.QyRound.Converters"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" Background="White" FontFamily="NSimSun"
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
@@ -765,10 +767,10 @@
                 <Button   Margin="20,0,0,0" VerticalAlignment="Center" Width="80"  Content="校验时间" Style="{DynamicResource MetroFlatButton}"  Command="{Binding LocalDataJxCmd}"  CommandParameter="{Binding}"/>
                 <Button   Margin="20,0,0,0" VerticalAlignment="Center" Width="80"  Content="数据解析" Style="{DynamicResource MetroFlatButton}"  Command="{Binding LocalDataJxCmd}"  CommandParameter="{Binding}"/>
                 <!--<metro:MetroProgressBar  Margin="10,0,0,0" Width="400" Value="56" Foreground="#5DA0C7"    Background="#EDEDED" Height="32"/>-->
-                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="30,0,0,0">
+                <!--<StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="30,0,0,0">
                     <TextBlock Text="传输速率：" FontSize="14"  Foreground="#333333"/>
                     <TextBlock Margin="2,0,0,0" FontSize="14"  Foreground="#333333" Text="{Binding TextRate}" />
-                </StackPanel>
+                </StackPanel>-->
             </StackPanel>
         </Border>
         <Grid  Grid.Row="1" Margin="0,2,0,0">
@@ -784,8 +786,8 @@
                     </Grid.RowDefinitions>
                     <Border Background="#D9EDF7">
                         <Grid>
-                            <Ellipse HorizontalAlignment="Left" Margin="10,0,0,0" Width="20" Height="20" Fill="Green"/>
-                            <TextBlock Text="采集控制" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="40,0,0,0"/>
+                            <Ellipse HorizontalAlignment="Left" Margin="10,0,0,0" Width="20" Height="20" Fill="{Binding GatherVm.IsConnected,Converter={StaticResource colorConvert}}"/>
+                            <TextBlock Text="采集控制" FontSize="16" Width="100" HorizontalAlignment="Left" Foreground="#31708F" VerticalAlignment="Center" Margin="40,0,0,0"/>
                             <Button HorizontalAlignment="Right" Margin="0,0,100,0" VerticalAlignment="Center" Width="80"  Content="开始采集" Style="{DynamicResource MetroFlatButton}"  Command="{Binding OpenDevice}"  CommandParameter="0">
 
                             </Button>
@@ -837,7 +839,7 @@
                                 </Grid.RowDefinitions>
                             <Border Background="#D9EDF7">
                                 <Grid>
-                                        <Ellipse HorizontalAlignment="Left" Margin="10,0,0,0" Width="20" Height="20" Fill="Green"/>
+                                        <Ellipse HorizontalAlignment="Left" Margin="10,0,0,0" Width="20" Height="20" Fill="{Binding IsOpen,Converter={StaticResource colorConvert}}"/>
                                         <TextBlock Text="SDK存储管理" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="40,0,0,0"/>
                                         <Button Width="80" HorizontalAlignment="Right"  Margin="0,4,10,4" Content="存储自检" Style="{DynamicResource MetroFlatButton}"  Command="{Binding MenuItemCommand}" />
                                     </Grid>
@@ -931,8 +933,8 @@
                     </Grid.RowDefinitions>
                     <Border Background="#D9EDF7">
                         <Grid>
-                        <Ellipse HorizontalAlignment="Left" Margin="10,0,0,0" Width="20" Height="20" Fill="Green"/>
-                        <TextBlock Text="射频控制" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="40,0,0,0"/>
+                            <Ellipse HorizontalAlignment="Left" Margin="10,0,0,0" Width="20" Height="20" Fill="{Binding RadioVm.IsConnected,Converter={StaticResource colorConvert}}"/>
+                        <TextBlock Text="射频控制" Width="100" HorizontalAlignment="Left" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="40,0,0,0"/>
                         <Button HorizontalAlignment="Right" Margin="0,0,100,0" VerticalAlignment="Center" Width="80"  Content="开始采集" Style="{DynamicResource MetroFlatButton}"  Command="{Binding OpenDevice}"  CommandParameter="0">
 
                         </Button>

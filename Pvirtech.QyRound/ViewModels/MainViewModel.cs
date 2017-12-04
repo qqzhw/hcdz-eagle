@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Pvirtech.QyRound.Services;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace Pvirtech.QyRound.ViewModels
@@ -35,12 +37,35 @@ namespace Pvirtech.QyRound.ViewModels
 			};
 			dispatcherTimer.Tick += DispatcherTimer_Tick;
 			LoadData();//加载基本信息
-		}
+            ConnectCmd = new DelegateCommand(OnConnectedDevice);
+        }
 
-		private void LoadData()
+        private void OnConnectedDevice()
+        {
+            GatherVm.Connect();
+            RadioVm.Connect();
+        }
+
+        public ICommand ConnectCmd { get; private set; }
+        private GatherViewModel _gatherVm;
+        public GatherViewModel GatherVm
+        {
+            get { return _gatherVm; }
+            set { SetProperty(ref _gatherVm, value); }
+
+        }
+        private RadioViewModel _radioVm;
+        public RadioViewModel RadioVm
+        {
+            get { return _radioVm; }
+            set { SetProperty(ref _radioVm, value); }
+
+        }
+        private void LoadData()
 		{
-
-		}
+            _gatherVm = new GatherViewModel();
+            _radioVm = new RadioViewModel();
+        }
 
 		private void DispatcherTimer_Tick(object sender, EventArgs e)
 		{

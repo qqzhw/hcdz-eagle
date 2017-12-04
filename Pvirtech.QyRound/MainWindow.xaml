@@ -11,12 +11,12 @@
 					  xmlns:hcdz="clr-namespace:Pvirtech.QyRound.Core.Interactivity;assembly=Pvirtech.QyRound.Core"
                       Title="{Binding Title}" TitleTemplate="{StaticResource PvirtechWindowTitle}" 
                       Width="1240"  Height="768"    
-					  Icon="/logo.ico" IconEdgeMode="Aliased" IconScalingMode="ScaleDownLargerFrame"					 
+					  Icon="/logo.ico" IconEdgeMode="Unspecified" IconScalingMode="ScaleDownLargerFrame"					 
                       FontFamily="SimHei"
                       Dialog:DialogParticipation.Register="{Binding}"
                       GlowBrush="{DynamicResource AccentColorBrush}" 
                       NonActiveGlowBrush="#CDFF0000" WindowTransitionsEnabled="False"
-                      ShowIconOnTitleBar="True" TitlebarHeight="50"
+                      ShowIconOnTitleBar="True" TitlebarHeight="48"
                       WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True"
                       ShowTitleBar="True"
                       mc:Ignorable="d"   
@@ -91,18 +91,7 @@
 
 	<Controls:MetroWindow.RightWindowCommands >
 		<Controls:WindowCommands  ShowSeparators="False"   Margin="0,5,0,0" VerticalContentAlignment="Top">
-			<!--<Image  x:Name="ImgSetting"    Source="{Binding ImgSource}" ToolTip="{Binding ImgToolTip}"  Height="22" Width="22" >
-				<i:Interaction.Triggers>
-					<i:EventTrigger EventName="MouseLeftButtonDown">
-						<i:InvokeCommandAction Command="{Binding SettingCommand}"  CommandParameter="{Binding ElementName=ImgSetting}"/>
-					</i:EventTrigger>
-				</i:Interaction.Triggers>
-			</Image>-->
-			<!--<iconPacks:PackIconFontAwesome Kind="PowerOff"   Foreground="Green" Margin="0,3,0,0"    x:Name="MagleButton" 
-                          ToolTip="置忙/置闲" />-->
-			<!--<iconPacks:PackIconFontAwesome Kind="ArrowsAlt"  Margin="10,4,0,0"  Height="14" Opacity="0.90"  x:Name="MagToggleButton" 
-                          ToolTip="全屏"  MouseLeftButtonDown="FullButtonDown"/>-->
-
+		 
 			<iconPacks:PackIconFontAwesome Kind="Cog"   Margin="10,3,0,5" Opacity="0.90" x:Name="MagicToggleButton" 
                           ToolTip="设置" />
 		</Controls:WindowCommands>
@@ -148,7 +137,7 @@
 		</Border>
 		<Rectangle x:Name="rectangle" Grid.Row="1" Height="5" Fill="#E12271ac" Margin="0"/>
 		<ContentControl  Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  prism:RegionManager.RegionName="MainRegion"    />
-		<StatusBar Grid.Row="3" Background="#3C84B4" Margin="0" Height="36" x:Name="statusBar" >
+		<StatusBar Grid.Row="3" Background="#3C84B4" Margin="0" Height="32" x:Name="statusBar" >
 			<StatusBarItem  Margin="0,0,0,0"  Content="网络连接正常" /> 
 		</StatusBar>
 

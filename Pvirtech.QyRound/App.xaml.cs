@@ -54,31 +54,7 @@ namespace Pvirtech.QyRound
 		}
 
 		protected override void OnStartup(StartupEventArgs e)
-		{
-            ManagementObjectSearcher s1 = new ManagementObjectSearcher(
-     @"SELECT DeviceID FROM Win32_NetworkAdapter WHERE NetConnectionStatus=2 AND PNPDeviceID LIKE 'PCI%'");
-            var ss1 = s1.Get();
-            //SELECT* FROM Win32_NetworkAdapter where PhysicalAdapter = TRUE and MACAddress>‘’ //只查询有MAC的物理网卡，不包含虚拟网卡
-            // ManagementObjectSearcher s = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapterConfiguration where IPenabled=true");
-            ManagementObjectSearcher s = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
-            foreach (ManagementObject bb in s.Get())
-            {
-                foreach (PropertyData pd in bb.Properties)
-                {
-                    if (pd.Name== "NetConnectionStatus ")
-                    {
-
-                    }
-                };
-            }
-            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
-            foreach (NetworkInterface adapter in adapters)
-            {
-                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-                {
-                    //
-                }
-            }
+		{           
             if (!SingleInstanceCheck())
 			{
 				return;
