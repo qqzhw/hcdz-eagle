@@ -11,7 +11,7 @@ namespace Pvirtech.QyRound.SDK
     public class SDKApi
     {
         [DllImport("SDK.dll")]
-        public unsafe static extern void EagleData_GetVersion(ref int major, ref int minor);
+        public unsafe static extern void EagleData_GetVersion(out int major, out int minor);
         [DllImport("SDK.dll")]
         public unsafe static extern int EagleData_Init();
 
@@ -26,13 +26,13 @@ namespace Pvirtech.QyRound.SDK
         public unsafe static extern int EagleData_GetRecordNumber();
 
         [DllImport("SDK.dll")]
-        public unsafe static extern int EagleData_GetRecordList(out EagleData_Record_Id rec_ids_buf, int num);
+        public unsafe static extern int EagleData_GetRecordList(out EagleData_Record_Id[] rec_ids_buf, int num);
 
         [DllImport("SDK.dll")]
-        public unsafe static extern EagleData_Record EagleData_GetRecordAndAllocMemory(EagleData_Record_Id id);
+        public unsafe static extern IntPtr EagleData_GetRecordAndAllocMemory(EagleData_Record_Id id);
 
         [DllImport("SDK.dll")]
-        public unsafe static extern void EagleData_FreeRecordMemory(ref EagleData_Record record);
+        public unsafe static extern void EagleData_FreeRecordMemory(IntPtr record);//ref EagleData_Record
 
         [DllImport("SDK.dll")]
         public unsafe static extern int EagleData_ReadOneStoredFrame(EagleData_Record_Id rec_id, EagleData_CcdRecord_Id ccd_rec_id, long frame_index, out string data_buf, int data_buf_len, out string head_buf, int head_buf_len);
@@ -102,12 +102,12 @@ namespace Pvirtech.QyRound.SDK
         public unsafe static extern int EagleControl_SetControlNICs( eagle_all_netcards nics);
 
         [DllImport("SDK.dll")]
-        public unsafe static extern int EagleControl_ScanAndGetDeviceNum(int device_num);
+        public unsafe static extern int EagleControl_ScanAndGetDeviceNum(out int device_num);
 
         [DllImport("SDK.dll")]
         public unsafe static extern int EagleControl_GetDeviceNum();
         [DllImport("SDK.dll")]
-        public unsafe static extern int EagleControl_GetDeviceIds(ref int id_array,   int array_size, ref int actual_ids);
+        public unsafe static extern int EagleControl_GetDeviceIds(ref int[] id_array,   int array_size, ref int actual_ids);
 
         [DllImport("SDK.dll")]
         public unsafe static extern int EagleControl_GetCurrentControlNIC(  int device_id,  ref eagle_netcard_info netcard);
@@ -213,5 +213,11 @@ namespace Pvirtech.QyRound.SDK
         public unsafe static extern int EagleControl_GetDeviceCameraStatus( int device_id,  eagle_camera_line_staus current_status);
         [DllImport("SDK.dll")]
         public unsafe static extern  int EagleControl_GetDeviceDiskVolume( int device_id,  eagle_disk_total_volume disk_volume);
+        [DllImport("SDK.dll")]
+        public unsafe static extern int EagleData_ExpStartRead(int device_id, ref eagle_exp_export_info export_info);
+        [DllImport("SDK.dll")]
+        public unsafe static extern int EagleData_ExpGetExportStatus(int device_id, ref eagle_exp_export_status status);
+        [DllImport("SDK.dll")]
+        public unsafe static extern int EagleData_ExpStopRead(int device_id);
     }
 }

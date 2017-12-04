@@ -22,6 +22,8 @@
                 <Border Background="#D9EDF7">
                     <Grid>
                         <TextBlock Text="基本设置" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                        <Button  Margin="200,0,0,0"  VerticalAlignment="Center" Width="80"  Content="保存" Style="{DynamicResource MetroFlatButton}"  Command="{Binding SaveCommand}" />
+
                     </Grid>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="#D9EDF7" Grid.Row="1">
@@ -29,45 +31,38 @@
                     <GroupBox    Header="通道文件夹"   HorizontalAlignment="Left"   Margin="10,5,0,10" VerticalAlignment="Top">
                         <Border  BorderBrush="#D9EDF7" BorderThickness="1" Width="600">
                             <StackPanel  VerticalAlignment="Top" Margin="0,0,15,10">
-                                <!--<StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-									<Label Content="通道1"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox  Margin="2,0,0,0"  Width="200"  Text="{Binding Bar0}"/>  
+                                <StackPanel Orientation="Horizontal"   Margin="10,0,0,0"> 
+                                    <Label Content="采集IP地址" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <TextBox  x:Name="txtIp" Text="{Binding CjIP}" Width="130" VerticalAlignment="Center" />
+                                    <Label Content="端口" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    <TextBox Width="50" Text="{Binding CjPort}" Height="26" VerticalAlignment="Center"  x:Name="txtPort"/>
+                                   
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"   Margin="10,5,0,0">
+                                    <Label Content="射频IP地址" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <TextBox  x:Name="sptxtIp" Text="{Binding SpIP}" Width="130" VerticalAlignment="Center" />
+                                    <Label Content="端口" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    <TextBox Width="50" Text="{Binding SpPort}" Height="26" VerticalAlignment="Center"  x:Name="txtspPort"/>
+
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
+									<Label Content="Byte0"  VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <TextBox  Margin="2,0,0,0"  Width="100"  Text="{Binding Byte0}"/>  
 								</StackPanel>
-								<StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-									<Label Content="通道2"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox  Margin="2,0,0,0" Text="{Binding Bar1}" Width="200" />
+								<StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
+									<Label Content="Byte1"  VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <TextBox  Margin="2,0,0,0" Text="{Binding Byte1}" Width="100" />
 								</StackPanel>
-								<StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-									<Label Content="通道3"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox  Margin="2,0,0,0" Text="{Binding Bar2}" Width="200" />
+								<StackPanel Orientation="Horizontal"  Margin="10,10,0,0">
+									<Label Content="帧 头"  VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <TextBox  Margin="2,0,0,0" Text="{Binding FrameTop}" Width="100" />
 								</StackPanel>
-								<StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
+								<!--<StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
 									<Label Content="通道4"  VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     <TextBox  Margin="2,0,0,0"  Width="200"  Text="{Binding Bar3}"/>
-								</StackPanel>
-								<StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-									<Label Content="通道5"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox  Margin="2,0,0,0" Text="{Binding Bar4}"  Width="200" />
-								</StackPanel>
-								<StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-									<Label Content="通道5"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-									<TextBox  Margin="2,0,0,0" Text="{Binding Bar5}"  Width="200" />
 								</StackPanel>-->
-                                <StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-                                    <Label Content="  服务端地址"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox  Margin="2,0,0,0" Text="{Binding SignalrServer}"  Width="200" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-                                    <Label Content="默认下载目录"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox  Margin="2,0,0,0" Text="{Binding LocalPath}" Width="300" />
-
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-                                    <Label Content="远程下载地址"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox  Margin="2,0,0,0" Text="{Binding DownloadUrl}" Width="360" />
-                                    <Button  Margin="20,0,0,0" VerticalAlignment="Center" Width="80"  Content="保存" Style="{DynamicResource MetroFlatButton}"  Command="{Binding SaveCommand}" />
-
-                                </StackPanel>
+								 
+                             
 
                             </StackPanel>
                         </Border>
@@ -90,26 +85,22 @@
                     </Grid>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="#D9EDF7" Margin="0,0,0,5" Grid.Row="1">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
+                            <Label Content="  服务端地址"  VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            <TextBox  Margin="2,0,0,0" Text="{Binding SignalrServer}"  Width="200" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
+                            <Label Content="默认下载目录"  VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            <TextBox  Margin="2,0,0,0" Text="{Binding LocalPath}" Width="300" />
 
-                    <Border  BorderBrush="#D9EDF7" BorderThickness="1">
-                        <Grid   Margin="0,0,15,10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="35"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal"  Margin="15,0,0,0">
-                                <Label Content="IP地址"  VerticalAlignment="Center" />
-                                <TextBox  x:Name="txtIp" Width="200" VerticalAlignment="Center" />
-                                <Label Content="端口号" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                                <TextBox Width="60" Height="26" VerticalAlignment="Center"  x:Name="txtPort"/>
-                                <Button  Height="28" VerticalAlignment="Center" Margin="30,0,0,0" Width="60"  Content="连接" Style="{DynamicResource MetroFlatButton}" Click="ConnectClick" />
-                                <Button Height="28" Margin="20,0,0,0" Width="60"  Content="断开" Style="{DynamicResource MetroFlatButtonDisable}" Click="CloseClick" />
-                            </StackPanel>
-                            <ScrollViewer  Grid.Row="1" Margin="20,0,0,0">
-                                <TextBox Width="auto"  x:Name="txtMsg"   BorderBrush="#2471ac"  ScrollViewer.CanContentScroll="True" IsReadOnly="True"  TextWrapping="Wrap"/>
-                            </ScrollViewer>
-                        </Grid>
-                    </Border>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
+                            <Label Content="远程下载地址"  VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            <TextBox  Margin="2,0,0,0" Text="{Binding DownloadUrl}" Width="360" />
+                            
+                        </StackPanel>
+                    </StackPanel>
                 </Border>
             </Grid>
         </Border>

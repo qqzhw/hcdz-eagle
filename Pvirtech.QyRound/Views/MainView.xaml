@@ -758,26 +758,11 @@
                 </LinearGradientBrush>
             </Border.Background>
             <StackPanel Orientation="Horizontal">
-                <Label Content="目录"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                <ComboBox Margin="2,0,0,0" x:Name="cbxDrive" SelectedValue="{Binding SelectedDsik}" Height="20"  SelectedIndex="0" Width="60"  ItemsSource="{Binding DriveInfoItems}"  telerik:StyleManager.Theme="Windows8Touch">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"  FontSize="14"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding SelectedDirCmd}"  CommandParameter="{Binding ElementName=cbxDrive,Path=SelectedItem}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ComboBox>
-                <Label Content="方式" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                <ComboBox Margin="2,0,0,0" x:Name="cbxMothed" Height="20"   SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
-                    <ComboBoxItem Content="存盘" />
-                    <ComboBoxItem Content="测速"/>
-                </ComboBox> 
+                <Button   Margin="20,0,0,0" VerticalAlignment="Center" Width="80"  Content="连接设备" Style="{DynamicResource MetroFlatButton}"  Command="{Binding ConnectCmd}" IsEnabled="{Binding BtnIsEnabled}"  CommandParameter="{Binding}"/>
                 <Button   Margin="20,0,0,0" VerticalAlignment="Center" Width="80"  Content="自检" Style="{DynamicResource MetroFlatButton}"  Command="{Binding ReadDmaCmd}" IsEnabled="{Binding BtnIsEnabled}"  CommandParameter="{Binding}"/>
-                <Button   Margin="20,0,0,0" VerticalAlignment="Center" Width="80"  Content="关闭DMA" Style="{DynamicResource MetroFlatButton}"  Command="{Binding CloseDmaCmd}"  CommandParameter="{Binding}"/>
+                <Button   Margin="20,0,0,0" VerticalAlignment="Center" Width="80"  Content="开始采集" Style="{DynamicResource MetroFlatButton}"  Command="{Binding CloseDmaCmd}"  CommandParameter="{Binding}"/>
+                <Button   Margin="20,0,0,0" VerticalAlignment="Center" Width="80"  Content="关闭采集" Style="{DynamicResource MetroFlatButton}"  Command="{Binding CloseDmaCmd}"  CommandParameter="{Binding}"/>
+                <Button   Margin="20,0,0,0" VerticalAlignment="Center" Width="80"  Content="校验时间" Style="{DynamicResource MetroFlatButton}"  Command="{Binding LocalDataJxCmd}"  CommandParameter="{Binding}"/>
                 <Button   Margin="20,0,0,0" VerticalAlignment="Center" Width="80"  Content="数据解析" Style="{DynamicResource MetroFlatButton}"  Command="{Binding LocalDataJxCmd}"  CommandParameter="{Binding}"/>
                 <!--<metro:MetroProgressBar  Margin="10,0,0,0" Width="400" Value="56" Foreground="#5DA0C7"    Background="#EDEDED" Height="32"/>-->
                 <StackPanel Orientation="Horizontal"  VerticalAlignment="Center" Margin="30,0,0,0">
@@ -786,7 +771,7 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-        <Grid  Grid.Row="1" Margin="0,10,0,0">
+        <Grid  Grid.Row="1" Margin="0,2,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -827,11 +812,13 @@
                             <Rectangle Height="1" Fill="#999999" Margin="0,5,0,0"/>
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="采集时间：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                <ComboBox Margin="2,0,0,0"   Height="20"   SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
+                                <TextBox Text="30" Width="60"/>
+                                <TextBlock Text="秒" Margin="2,0,0,0" VerticalAlignment="Center"/>
+                                <!--<ComboBox Margin="2,0,0,0"   Height="20"   SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
                                     <ComboBoxItem Content="30分钟" />
                                     <ComboBoxItem Content="1小时"/>
                                     <ComboBoxItem Content="2小时"/>
-                                </ComboBox>
+                                </ComboBox>-->
                                
                             </StackPanel>
                             <!--<Rectangle Height="1" Fill="#999999" Margin="0,5,0,0"/>
@@ -849,9 +836,11 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                             <Border Background="#D9EDF7">
-                                <Grid> 
-                                    <TextBlock Text="磁盘管理" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="20,0,0,0"/>                                    
-                                </Grid>
+                                <Grid>
+                                        <Ellipse HorizontalAlignment="Left" Margin="10,0,0,0" Width="20" Height="20" Fill="Green"/>
+                                        <TextBlock Text="SDK存储管理" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="40,0,0,0"/>
+                                        <Button Width="80" HorizontalAlignment="Right"  Margin="0,4,10,4" Content="存储自检" Style="{DynamicResource MetroFlatButton}"  Command="{Binding MenuItemCommand}" />
+                                    </Grid>
                             </Border> 
                                     <Grid Margin="10,5,10,0" Grid.Row="1">
                                         <Grid.RowDefinitions>
@@ -864,7 +853,21 @@
                                             <ColumnDefinition  Width="*"/>
                                             <ColumnDefinition  Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                      <Label Content="磁盘空间："   VerticalAlignment="Center"/>
+                                    <!--<Label Content="目录"  VerticalAlignment="Center" Margin="5,0,0,0"/>-->
+                                    <ComboBox Margin="2,0,0,0" x:Name="cbxDrive" SelectedValue="{Binding SelectedDsik}" Height="20"  SelectedIndex="0" Width="60"  ItemsSource="{Binding DriveInfoItems}"  telerik:StyleManager.Theme="Windows8Touch">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}"  FontSize="14"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding SelectedDirCmd}"  CommandParameter="{Binding ElementName=cbxDrive,Path=SelectedItem}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ComboBox>
+                                   
+                                    <!--<Label Content="磁盘空间："   VerticalAlignment="Center"/>-->
                                         <metro:MetroProgressBar Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="500" Value="{Binding DiskPercent}" Foreground="#5DA0C7"    Background="#EDEDED" Height="32"/>
                                         <TextBlock Text="{Binding DiskVal}" Grid.Column="2" Margin="2,0,0,0" VerticalAlignment="Center"/>
                                     <Label Grid.Row="1" Content="设备信息："  HorizontalAlignment="Left" Margin="0,5,0,0"/>
@@ -900,12 +903,15 @@
 
                                         </StackPanel> 
                                         <StackPanel Orientation="Horizontal" >
-                                            <Label Content="选择路径：" VerticalAlignment="Center"   />
-                                            <TextBlock Text="{Binding SelectedPath}" Margin="10,0,0,0" FontWeight="Bold" FontFamily="SimSun" FontSize="14"  VerticalAlignment="Center"/>
-                                            <Button  Width="120" Margin="45,4,0,4" Content="格式化磁盘" Style="{DynamicResource MetroFlatButton}"  Command="{Binding MenuItemCommand}" />
-                                            <Button  Width="120" Margin="20,4,0,4" Content="新建文件夹" Style="{DynamicResource MetroFlatButton}"  Command="{Binding CreateNewCmd}" />
-                                            <Button  Width="120" Margin="20,4,0,4" Content="粘贴"   Style="{DynamicResource MetroFlatButton}"  Command="{Binding CopyNewCmd}" />
-                                          
+                                            <!--<Label Content="选择路径：" VerticalAlignment="Center"   />-->
+                                            <TextBlock Text="{Binding SelectedPath}" Visibility="Hidden" Margin="10,0,0,0" FontWeight="Bold" FontFamily="SimSun" FontSize="14"  VerticalAlignment="Center"/>
+                                            <Button    Margin="10,4,0,4" Padding="5,0" Content="SDK存储" Style="{DynamicResource MetroFlatButton}"  Command="{Binding SdkInitCmd}" />
+                                           
+                                            <!--<Button   Margin="20,4,0,4" Content="重命名" Style="{DynamicResource MetroFlatButton}"  Command="{Binding CreateNewCmd}" />-->
+                                            <Button   Margin="20,4,0,4" Content="开始采集"   Style="{DynamicResource MetroFlatButton}"  Command="{Binding CopyNewCmd}" />
+                                            <Button   Margin="20,4,0,4" Content="暂停采集"   Style="{DynamicResource MetroFlatButton}"  Command="{Binding CopyNewCmd}" />
+                                            <Button   Margin="20,4,0,4" Content="停止采集"   Style="{DynamicResource MetroFlatButton}"  Command="{Binding CopyNewCmd}" />
+
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
@@ -924,8 +930,14 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Border Background="#D9EDF7">
-                        <TextBlock Text="射频控制" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                        <Grid>
+                        <Ellipse HorizontalAlignment="Left" Margin="10,0,0,0" Width="20" Height="20" Fill="Green"/>
+                        <TextBlock Text="射频控制" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="40,0,0,0"/>
+                        <Button HorizontalAlignment="Right" Margin="0,0,100,0" VerticalAlignment="Center" Width="80"  Content="开始采集" Style="{DynamicResource MetroFlatButton}"  Command="{Binding OpenDevice}"  CommandParameter="0">
 
+                        </Button>
+                        <Button    Width="80" HorizontalAlignment="Right" Margin="0,0,8,0"   VerticalAlignment="Center" Content="关闭采集" Style="{DynamicResource MetroFlatButtonDisable}"  Command="{Binding DataContext.CloseChannel ,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                        </Grid>
                     </Border>
 
                     <Border Grid.Row="1" BorderThickness="0" BorderBrush="#D9EDF7" Margin="0,0,0,5" >

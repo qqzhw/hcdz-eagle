@@ -87,7 +87,7 @@ namespace Pvirtech.QyRound.Views
             this.Dispatcher.Invoke(() =>
             {
                 //Console.WriteLine("Server sent a message: " + message.Text);
-                txtMsg.Text += message.Text + "\n";
+               // txtMsg.Text += message.Text + "\n";
             });
         }
 
