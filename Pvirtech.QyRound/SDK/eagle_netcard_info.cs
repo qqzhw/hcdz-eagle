@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Pvirtech.QyRound.SDK
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct eagle_netcard_info
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
-        public char[] dev_name; /*!< name of the nic */
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
-        public char[] dev_description; /*!< description of the nic */
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+        public string dev_name; /*!< name of the nic */
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+        public string dev_description; /*!< description of the nic */
     }
 }

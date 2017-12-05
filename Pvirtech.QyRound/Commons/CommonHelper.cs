@@ -6,10 +6,22 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pvirtech.QyRound.Common
+namespace Pvirtech.QyRound.Commons
 {
 	public class CommonHelper
 	{
+        /// <summary>
+        /// 转换接收到的字符串
+        /// </summary>
+        /// <param name="recvStr"></param>
+        /// <returns></returns>
+        public static string UTF8ToUnicode(string recvStr)
+        {
+            byte[] tempStr = Encoding.UTF8.GetBytes(recvStr);
+            byte[] tempDef = Encoding.Convert(Encoding.UTF8, Encoding.Default, tempStr);
+            string msg = Encoding.Default.GetString(tempDef);
+            return msg;
+        }
 		public string ByteToString(byte[] InBytes, int len)
 		{
 			string StringOut = "";

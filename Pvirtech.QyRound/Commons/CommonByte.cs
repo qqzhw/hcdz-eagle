@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pvirtech.QyRound.Common
+namespace Pvirtech.QyRound.Commons
 {
     public class CommonByte
     {

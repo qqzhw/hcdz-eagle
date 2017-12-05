@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pvirtech.QyRound.Common
+namespace Pvirtech.QyRound.Commons
 {
     public static class ByteFormatter
     {

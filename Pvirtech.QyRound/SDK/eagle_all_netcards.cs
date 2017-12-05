@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pvirtech.QyRound.SDK
 {
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct eagle_all_netcards
     {
         //cards=10;

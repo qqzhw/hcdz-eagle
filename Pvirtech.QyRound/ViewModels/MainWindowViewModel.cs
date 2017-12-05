@@ -53,14 +53,14 @@ namespace Pvirtech.QyRound.ViewModels
             //获取存储SDK 版本
             int major = 0, minor =0;
             //SetConsoleCtrlHandler(CosonleHandler, TRUE);
-            SDKApi.EagleData_GetVersion(out major, out minor);
+            SDKApi.EagleData_GetVersion(ref major, ref minor);
             Console.WriteLine(string.Format("SDK Version: {0}.{1}\n", major, minor));
             LogHelper.WriteLog(string.Format("SDK Version: {0}.{1}\n", major, minor));
             //所有在本地计算机上网卡列表
 
             eagle_all_netcards nics = new eagle_all_netcards();
 
-            int ret = SDKApi.EagleControl_GetSystemNICs(out nics);
+            int ret = SDKApi.EagleControl_GetSystemNICs(ref nics);
             LogHelper.WriteLog(nics.card_num.ToString());
 
             for (int i = 1; i <= nics.card_num; i++)
@@ -96,7 +96,7 @@ namespace Pvirtech.QyRound.ViewModels
             * get device number
             */
             int device_num = 0;
-            ret = SDKApi.EagleControl_ScanAndGetDeviceNum(out device_num);
+            ret = SDKApi.EagleControl_ScanAndGetDeviceNum(ref device_num);
             LogHelper.WriteLog(string.Format("get device numbers {0}", device_num));
             /*
             * get device ids

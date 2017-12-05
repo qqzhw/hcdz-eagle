@@ -110,7 +110,7 @@ namespace Pvirtech.QyRound.ViewModels
         private int ScanAndGetDeviceNum()
         {
             int deviceNum = 0;
-            SDKApi.EagleControl_ScanAndGetDeviceNum(out deviceNum);
+            SDKApi.EagleControl_ScanAndGetDeviceNum(ref deviceNum);
             return deviceNum;
         }
 

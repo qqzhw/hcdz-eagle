@@ -910,7 +910,7 @@
                                             <Button    Margin="10,4,0,4" Padding="5,0" Content="SDK存储" Style="{DynamicResource MetroFlatButton}"  Command="{Binding SdkInitCmd}" />
                                            
                                             <!--<Button   Margin="20,4,0,4" Content="重命名" Style="{DynamicResource MetroFlatButton}"  Command="{Binding CreateNewCmd}" />-->
-                                            <Button   Margin="20,4,0,4" Content="开始采集"   Style="{DynamicResource MetroFlatButton}"  Command="{Binding CopyNewCmd}" />
+                                            <Button   Margin="20,4,0,4" Content="开始采集"   Style="{DynamicResource MetroFlatButton}"  Command="{Binding StartRecordCmd}" />
                                             <Button   Margin="20,4,0,4" Content="暂停采集"   Style="{DynamicResource MetroFlatButton}"  Command="{Binding CopyNewCmd}" />
                                             <Button   Margin="20,4,0,4" Content="停止采集"   Style="{DynamicResource MetroFlatButton}"  Command="{Binding CopyNewCmd}" />
 

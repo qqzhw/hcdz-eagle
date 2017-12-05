@@ -125,9 +125,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Common\ByteFormatter.cs" />
-    <Compile Include="Common\CommonByte.cs" />
-    <Compile Include="Common\CommonHelper.cs" />
+    <Compile Include="Commons\ByteFormatter.cs" />
+    <Compile Include="Commons\CommonByte.cs" />
+    <Compile Include="Commons\CommonHelper.cs" />
     <Compile Include="Controls\HeaderControl.cs" />
     <Compile Include="Converters\TrueToColorConverter.cs" />
     <Compile Include="QyRoundModule .cs" />
