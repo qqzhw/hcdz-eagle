@@ -130,6 +130,7 @@
     <Compile Include="Commons\CommonHelper.cs" />
     <Compile Include="Controls\HeaderControl.cs" />
     <Compile Include="Converters\TrueToColorConverter.cs" />
+    <Compile Include="Models\CollectMode.cs" />
     <Compile Include="QyRoundModule .cs" />
     <Compile Include="SDK\BITS.cs" />
     <Compile Include="SDK\Class1.cs" />

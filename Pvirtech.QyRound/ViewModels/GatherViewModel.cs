@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using Pvirtech.TcpSocket.Scs.Communication.Messages;
 using Pvirtech.QyRound.Core.Common;
 using Pvirtech.TcpSocket.Scs.Communication;
+using System.Collections.ObjectModel;
+using Pvirtech.QyRound.Models;
+using System.Windows.Input;
+using Prism.Commands;
 
 namespace Pvirtech.QyRound.ViewModels
 {
@@ -22,12 +26,38 @@ namespace Pvirtech.QyRound.ViewModels
         public  IScsClient Client { get; set; }
         public GatherViewModel()
         {
+           
+            SelectedModeCmd =new   DelegateCommand<object>(OnSelectedMode);
             Init();
+            InitModel();
         }
+
+        private void OnSelectedMode(object obj)
+        {
+             
+        }
+
+        /// <summary>
+        /// 采集自检
+        /// </summary>
+        private void OnSelfCheck()
+        {
+
+        }
+        private void InitModel()
+        {
+            _collectMode = new ObservableCollection<CollectMode>();
+            _collectMode.Add(new CollectMode() { ModeByte=0x01,Name="盲采集"});
+            _collectMode.Add(new CollectMode() { ModeByte = 0x02, Name = "门限采集" });
+            _collectMode.Add(new CollectMode() { ModeByte = 0x03, Name = "标准采集" });
+
+        }
+
         private void Init()
         {
             _cjIp = Settings.Default.CjIP;
             _cjPort = Settings.Default.CjPort;
+            Client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(CjIP, CjPort));
         }
         public void Connect()
         {
@@ -35,7 +65,7 @@ namespace Pvirtech.QyRound.ViewModels
             {
 
                 //Create a client object to connect a server on 127.0.0.1 (local) IP and listens 10085 TCP port
-                Client = ScsClientFactory.CreateClient(new ScsTcpEndPoint(CjIP, CjPort));
+                
                 // client.WireProtocol = new CustomWireProtocol(); //Set custom wire protocol
                 //Register to MessageReceived event to receive messages from server.
                 Client.ConnectTimeout = 5;
@@ -78,6 +108,8 @@ namespace Pvirtech.QyRound.ViewModels
         }
 
         #region 属性
+        public ICommand SelectedModeCmd { get; private set; }
+
         private bool _isConnected;
         public bool IsConnected
         {
@@ -95,6 +127,13 @@ namespace Pvirtech.QyRound.ViewModels
         {
             get { return _cjIp; }
             set { SetProperty(ref _cjIp, value); }
+        }
+
+        private ObservableCollection<CollectMode> _collectMode;
+        public ObservableCollection<CollectMode>  CollectModes
+        {
+            get { return _collectMode; }
+            set { SetProperty(ref _collectMode, value); }
         }
         #endregion
     }

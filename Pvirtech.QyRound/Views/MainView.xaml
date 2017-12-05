@@ -788,10 +788,10 @@
                         <Grid>
                             <Ellipse HorizontalAlignment="Left" Margin="10,0,0,0" Width="20" Height="20" Fill="{Binding GatherVm.IsConnected,Converter={StaticResource colorConvert}}"/>
                             <TextBlock Text="采集控制" FontSize="16" Width="100" HorizontalAlignment="Left" Foreground="#31708F" VerticalAlignment="Center" Margin="40,0,0,0"/>
-                            <Button HorizontalAlignment="Right" Margin="0,0,100,0" VerticalAlignment="Center" Width="80"  Content="开始采集" Style="{DynamicResource MetroFlatButton}"  Command="{Binding OpenDevice}"  CommandParameter="0">
+                            <Button HorizontalAlignment="Right"  IsEnabled="{Binding CjButtonEnable}" Margin="0,0,10,0" VerticalAlignment="Center" Width="80"  Content="{Binding CjButtonText}"   Style="{DynamicResource MetroFlatButton}"  Command="{Binding CjStartCmd}"  CommandParameter="0" />
 
-                            </Button>
-                            <Button    Width="80" HorizontalAlignment="Right" Margin="0,0,8,0"   VerticalAlignment="Center" Content="关闭采集" Style="{DynamicResource MetroFlatButtonDisable}"  Command="{Binding DataContext.CloseChannel ,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" />
+
+                            <!--<Button    Width="80" HorizontalAlignment="Right" Margin="0,0,8,0"   VerticalAlignment="Center" Content="关闭采集" Style="{DynamicResource MetroFlatButtonDisable}"  Command="{Binding DataContext.CloseChannel ,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" />-->
                         </Grid>
                     </Border>
                     <Border BorderThickness="1"  BorderBrush="#D9EDF7" VerticalAlignment="Top" Grid.Row="1">
@@ -799,22 +799,23 @@
                     <StackPanel  VerticalAlignment="Center" Margin="0,5,0,5">
                              <StackPanel Orientation="Horizontal">
                                         <Label Content="采集模式：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                        <ComboBox Margin="2,0,0,0"   Height="20"   SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
-                                            <ComboBoxItem Content="盲采集" />
+                                <ComboBox Margin="2,0,0,0"  Width="90"  Height="20"  ItemsSource="{Binding GatherVm.CollectModes}" DisplayMemberPath="Name"  SelectedValuePath="ModeByte" SelectedItem="{Binding SelectCollectMode}"  SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
+                                            <!--<ComboBoxItem Content="盲采集" />
                                             <ComboBoxItem Content="校准采集"/>
-                                            <ComboBoxItem Content="阈值采集"/>
-                                        </ComboBox>
-                                        <Label Content="采集门限：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                        <ComboBox Margin="2,0,0,0"   Height="20"   SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
-                                            <ComboBoxItem Content="盲采集" />
-                                            <ComboBoxItem Content="校准采集"/>
-                                            <ComboBoxItem Content="阈值采集"/>
-                                        </ComboBox>
-                                    </StackPanel>
+                                            <ComboBoxItem Content="阈值采集"/>-->
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectedModeCmd}"  CommandParameter="{Binding SelectCollectMode}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
+                                        <Label Content="采集门限值：" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                       <TextBox Width="100"  VerticalAlignment="Center"/>
+                            </StackPanel>
                             <Rectangle Height="1" Fill="#999999" Margin="0,5,0,0"/>
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="采集时间：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                <TextBox Text="30" Width="60"/>
+                                <metro:NumericUpDown  Interval="5"   MinWidth="82"  HorizontalContentAlignment="Center"/>
                                 <TextBlock Text="秒" Margin="2,0,0,0" VerticalAlignment="Center"/>
                                 <!--<ComboBox Margin="2,0,0,0"   Height="20"   SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
                                     <ComboBoxItem Content="30分钟" />
