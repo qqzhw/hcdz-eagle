@@ -128,6 +128,7 @@
     <Compile Include="Commons\ByteFormatter.cs" />
     <Compile Include="Commons\CommonByte.cs" />
     <Compile Include="Commons\CommonHelper.cs" />
+    <Compile Include="Commons\ModbusUtility.cs" />
     <Compile Include="Controls\HeaderControl.cs" />
     <Compile Include="Converters\TrueToColorConverter.cs" />
     <Compile Include="QyRoundModule .cs" />
