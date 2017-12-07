@@ -744,7 +744,12 @@
                 <Setter Property="Background" Value="White" />
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
             </Style>
-        </UserControl.Resources>
+        <DataTemplate x:Key="TickTemplate">
+            <Grid>
+                <TextBlock Text="{Binding}" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
         <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -815,7 +820,7 @@
                             <Rectangle Height="1" Fill="#999999" Margin="0,5,0,0"/>
                             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                 <Label Content="采集时间：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                <metro:NumericUpDown  Interval="5"   MinWidth="82"  HorizontalContentAlignment="Center"/>
+                                <metro:NumericUpDown  Interval="5" Value="5"  MinWidth="82"  HorizontalContentAlignment="Center"/>
                                 <TextBlock Text="秒" Margin="2,0,0,0" VerticalAlignment="Center"/>
                                 <!--<ComboBox Margin="2,0,0,0"   Height="20"   SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
                                     <ComboBoxItem Content="30分钟" />
@@ -936,47 +941,47 @@
                         <Grid>
                             <Ellipse HorizontalAlignment="Left" Margin="10,0,0,0" Width="20" Height="20" Fill="{Binding RadioVm.IsConnected,Converter={StaticResource colorConvert}}"/>
                         <TextBlock Text="射频控制" Width="100" HorizontalAlignment="Left" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="40,0,0,0"/>
-                        <Button HorizontalAlignment="Right" Margin="0,0,100,0" VerticalAlignment="Center" Width="80"  Content="开始采集" Style="{DynamicResource MetroFlatButton}"  Command="{Binding OpenDevice}"  CommandParameter="0">
+                        <Button HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Width="80"  Content="开始采集" Style="{DynamicResource MetroFlatButton}"  Command="{Binding OpenDevice}"  CommandParameter="0">
 
                         </Button>
-                        <Button    Width="80" HorizontalAlignment="Right" Margin="0,0,8,0"   VerticalAlignment="Center" Content="关闭采集" Style="{DynamicResource MetroFlatButtonDisable}"  Command="{Binding DataContext.CloseChannel ,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                        <!--<Button    Width="80" HorizontalAlignment="Right" Margin="0,0,8,0"   VerticalAlignment="Center" Content="关闭采集" Style="{DynamicResource MetroFlatButtonDisable}"  Command="{Binding DataContext.CloseChannel ,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}" CommandParameter="{Binding}" />-->
                         </Grid>
                     </Border>
 
                     <Border Grid.Row="1" BorderThickness="0" BorderBrush="#D9EDF7"  >
                         <StackPanel  VerticalAlignment="Center" Margin="0,0,5,5">
                             <GroupBox   FontSize="14" Background="#D9EDF5" BorderBrush="#D9EDF5" BorderThickness="1"  Header="通道控制"   HorizontalAlignment="Stretch"   Margin="10,0,0,0" VerticalAlignment="Center">
-                                <StackPanel >
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,-5,0,0">
                                     <Label Content="通道选择：" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
                                     <Label Content="信号切换：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    <ComboBox Margin="2,0,0,0"  Width="90"  Height="20"  ItemsSource="{Binding RadioVm.Signals}" DisplayMemberPath="Name"  SelectedValuePath="Id" SelectedItem="{Binding SelectSignal}"  SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
+                                    <ComboBox   Width="90"  Height="20"  ItemsSource="{Binding RadioVm.Signals}" DisplayMemberPath="Name"  SelectedValuePath="Id" SelectedItem="{Binding SelectSignal}"  SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
 
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="SelectionChanged">
-                                                <i:InvokeCommandAction Command="{Binding SelectedModeCmd}"  CommandParameter="{Binding SelectCollectMode}"/>
+                                                <i:InvokeCommandAction Command="{Binding SelectSignalCmd}"  CommandParameter="{Binding SelectedSignal}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </ComboBox>
                                         <Label Content="中频带宽：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                        <ComboBox Margin="2,0,0,0"  Width="90"  Height="20"  ItemsSource="{Binding RadioVm.BandWidth}" DisplayMemberPath="Name"  SelectedValuePath="Id" SelectedItem="{Binding SelectBandWidth}"  SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
+                                        <ComboBox   Width="90"  Height="20"  ItemsSource="{Binding RadioVm.BandWidths}" DisplayMemberPath="Name"  SelectedValuePath="Id" SelectedItem="{Binding SelectBandWidth}"  SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
 
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="SelectionChanged">
-                                                    <i:InvokeCommandAction Command="{Binding }"  CommandParameter="{Binding SelectCollectMode}"/>
+                                                    <i:InvokeCommandAction Command="{Binding SelectKdCmd}"  CommandParameter="{Binding SelectedKd}"/>
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
                                         </ComboBox>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,4,0,0" >
+                                        <Label Content="射频增益："   VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                        <metro:NumericUpDown Value="0" Interval="5" Width="90"    HorizontalContentAlignment="Center"/>
                                         <Label Content="射频增益：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                        <metro:NumericUpDown  Interval="5"     HorizontalContentAlignment="Center"/>
+                                        <metro:NumericUpDown  Interval="5" Value="0"   Width="90"   HorizontalContentAlignment="Center"/>
                                         <Label Content="射频增益：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                        <metro:NumericUpDown  Interval="5"     HorizontalContentAlignment="Center"/>
-                                        <Label Content="射频增益：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                        <metro:NumericUpDown  Interval="5"     HorizontalContentAlignment="Center"/>
+                                        <metro:NumericUpDown  Interval="5"  Value="0"  Width="90"   HorizontalContentAlignment="Center"/>
                                     </StackPanel> 
                                 </StackPanel>
                             </GroupBox>
@@ -984,12 +989,12 @@
                                 <StackPanel >
                                 <StackPanel Orientation="Horizontal"  >
                                     <Label Content="标校信号：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    <ComboBox Margin="2,0,0,0"   Height="20"   SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
+                                    <ComboBox     Height="20"   SelectedIndex="0"  Width="90"   telerik:StyleManager.Theme="Windows8Touch">
                                         <ComboBoxItem Content="单载波" />
                                         <ComboBoxItem Content="梳状谱"/>
                                     </ComboBox>
                                     <Label Content="输出频率：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    <ComboBox Margin="2,0,0,0"  Width="90"  Height="20"  ItemsSource="{Binding RadioVm.BandWidth}" DisplayMemberPath="Name"  SelectedValuePath="Id" SelectedItem="{Binding SelectBandWidth}"  SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
+                                    <ComboBox    Width="90"  Height="20"  ItemsSource="{Binding RadioVm.BandWidth}" DisplayMemberPath="Name"  SelectedValuePath="Id" SelectedItem="{Binding SelectBandWidth}"  SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
 
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="SelectionChanged">
@@ -998,7 +1003,7 @@
                                         </i:Interaction.Triggers>
                                     </ComboBox>
                                     <Label Content="电平幅度：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                    <ComboBox Margin="2,0,0,0"   Height="20"   SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
+                                    <ComboBox Width="90"   Height="20"   SelectedIndex="0"     telerik:StyleManager.Theme="Windows8Touch">
                                         <ComboBoxItem Content="0" />
                                         <ComboBoxItem Content="1"/>
                                         <ComboBoxItem Content="2"/>
@@ -1009,16 +1014,24 @@
                                         <ComboBoxItem Content="25"/>
                                         <ComboBoxItem Content="30"/>
                                     </ComboBox>
-                                    <Label Content="dB"/>
+                                    <TextBlock Text="dB" VerticalAlignment="Center"/>
                                 </StackPanel>
-                                    <Border     Background="#D9EDF5" BorderBrush="#D9EDF5" BorderThickness="1"      HorizontalAlignment="Stretch"   Margin="10,5,0,0" VerticalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label Content="频率控制" VerticalAlignment="Center" />
+                                    <Border     Background="#D9EDF5" BorderBrush="#D9EDF5"   BorderThickness="1"     HorizontalAlignment="Stretch"   Margin="10,5,0,0" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal"  Height="28">
+                                            <Label Content="频率控制：" VerticalAlignment="Center" />
                                             <StackPanel Orientation="Horizontal">
-                                                <Label Content="频率码：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                                <metro:NumericUpDown  Interval="1"   Value="0"  HorizontalContentAlignment="Center"/>
-                                                <Label Content="频率输出：" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                                <telerik:RadSlider  Width="220"  Maximum="2970" Minimum="60" SmallChange="30"  VerticalAlignment="Center"   HorizontalContentAlignment="Center"/>
+                                                <TextBlock Text="频率码：" VerticalAlignment="Center" />
+                                                <metro:NumericUpDown  Interval="1" Width="88"  Value="0"  HorizontalContentAlignment="Center"/>
+                                                <TextBlock Text="输出：" VerticalAlignment="Center" Margin="6,0,0,0"/>
+                                                <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="{Binding SelectedRate}"/>
+                                                <telerik:RadSlider Margin="5,0,0,0"  telerik:StyleManager.Theme="Material" x:Name="silder"  TickTemplate="{StaticResource TickTemplate}" EnableSideTicks="True" IsSnapToTickEnabled="True" IsMouseWheelEnabled="True"  HandlesVisibility="Visible" TickFrequency="30" AutoToolTipPlacement="TopLeft"   Width="250"   Maximum="2970" Minimum="60" SmallChange="30" VerticalContentAlignment="Top" VerticalAlignment="Top" >
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="ValueChanged">
+                                                            <i:InvokeCommandAction Command="{Binding SelectedRateCmd}"  CommandParameter="{Binding ElementName=silder,Path=Value}"/>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </telerik:RadSlider>
+                                                
                                             </StackPanel>
                                         </StackPanel>
                                     </Border>
@@ -1035,7 +1048,7 @@
             </Border>
 
         </Grid>
-        <Border Grid.Row="2"   CornerRadius="5" Margin="10,2,10,10"   BorderThickness="1" BorderBrush="#BCE8F1">
+        <Border Grid.Row="2"   CornerRadius="5" Margin="10,2,10,5"   BorderThickness="1" BorderBrush="#BCE8F1">
             <telerik:RadGridView x:Name="dgInfo"  telerik:StyleManager.Theme="Windows10" FontSize="14"   ShowGroupPanel="False"
 						    RowHeight="32" CanUserInsertRows="True"    GridLinesVisibility="Horizontal" TextOptions.TextFormattingMode="Display"  IsFilteringAllowed="False" ItemsSource="{Binding DirectoryItems}"  
 							 RowIndicatorVisibility="Collapsed"  FontWeight="Medium"  SelectionUnit="FullRow"  SelectionMode="Single"     

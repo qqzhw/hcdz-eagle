@@ -47,7 +47,37 @@ namespace Pvirtech.QyRound.ViewModels
             SdkInitCmd = new DelegateCommand(OnSDKInit);
             StartRecordCmd= new DelegateCommand(OnStartRecord);
             SelectedModeCmd = new DelegateCommand<CollectMode>(OnSelectedMode);
-            CjStartCmd=new DelegateCommand(OnCjStart);
+            SelectSignalCmd= new DelegateCommand<Signal>(OnSelectedSignal);
+            SelectKdCmd = new DelegateCommand<BandWidth>(OnSelectedKd);
+            CjStartCmd =new DelegateCommand(OnCjStart);
+            SelectedRateCmd = new DelegateCommand<object>(OnSelectedRate);
+        }
+        /// <summary>
+        /// 频率输出选择值
+        /// </summary>
+        /// <param name="silderValue"></param>
+        private void OnSelectedRate(object silderValue)
+        {
+            int result = 60;
+            int.TryParse(silderValue.ToString(), out result);
+            SelectedRate = result;
+        }
+        /// <summary>
+        /// 选择信号
+        /// </summary>
+        /// <param name="signal"></param>
+        private void OnSelectedSignal(Signal signal)
+        {
+            
+        }
+
+        /// <summary>
+        /// 选择带宽
+        /// </summary>
+        /// <param name="bandWidth"></param>
+        private void OnSelectedKd(BandWidth bandWidth)
+        {
+             
         }
 
         /// <summary>
@@ -213,13 +243,14 @@ namespace Pvirtech.QyRound.ViewModels
             GatherVm.Connect();
             RadioVm.Connect();
         }
-
+        public ICommand SelectedRateCmd { get; private set; }
         public ICommand ConnectCmd { get; private set; }
         public ICommand SdkInitCmd { get; private set; }
         public ICommand StartRecordCmd { get; private set; }
         public ICommand SelectedModeCmd { get; private set; }
         public ICommand CjStartCmd { get; private set; }
-
+        public ICommand SelectSignalCmd { get; private set; }
+        public ICommand SelectKdCmd { get; private set; }
         private CollectMode _selectCollectMode;
         public CollectMode SelectCollectMode
         {
@@ -227,6 +258,21 @@ namespace Pvirtech.QyRound.ViewModels
             set { SetProperty(ref _selectCollectMode, value); }
 
         }
+        private Signal _selectsignal;
+        public Signal SelectedSignal
+        {
+            get { return _selectsignal; }
+            set { SetProperty(ref _selectsignal, value); }
+
+        }
+        private BandWidth _selectkd;
+        public BandWidth SelectedKd
+        {
+            get { return _selectkd; }
+            set { SetProperty(ref _selectkd, value); }
+
+        }
+
         private GatherViewModel _gatherVm;
         public GatherViewModel GatherVm
         {
@@ -253,6 +299,13 @@ namespace Pvirtech.QyRound.ViewModels
             get { return _cjbuttonEnable; }
             set { SetProperty(ref _cjbuttonEnable, value); }
         }
+        private int _selectedRate = 60;
+        public int SelectedRate
+        {
+            get { return _selectedRate; }
+            set { SetProperty(ref _selectedRate, value); }
+        }
+
         private void LoadData()
 		{
             _gatherVm = new GatherViewModel();
