@@ -5,8 +5,10 @@ using Prism.Events;
 using Prism.Mvvm;
 using Pvirtech.QyRound.Commons;
 using Pvirtech.QyRound.Core.Common;
+using Pvirtech.QyRound.Models;
 using Pvirtech.QyRound.SDK;
 using Pvirtech.QyRound.Services;
+using Pvirtech.TcpSocket.Scs.Communication.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,8 +46,87 @@ namespace Pvirtech.QyRound.ViewModels
             ConnectCmd = new DelegateCommand(OnConnectedDevice);
             SdkInitCmd = new DelegateCommand(OnSDKInit);
             StartRecordCmd= new DelegateCommand(OnStartRecord);
+            SelectedModeCmd = new DelegateCommand<CollectMode>(OnSelectedMode);
+            CjStartCmd=new DelegateCommand(OnCjStart);
         }
 
+        /// <summary>
+        /// 采集启停控制
+        /// </summary>
+        private void OnCjStart()
+        {
+            //var modeByte = new List<byte>();
+            //modeByte.Add(0x7e);//帧头
+            //modeByte.Add(0x03);//帧长度
+            //modeByte.Add(0x00);//帧标识
+            //modeByte.Add(collectMode.ModeByte);//数据
+            ////和校验
+            //var andValue = (byte)(0x30 + 0x00 + collectMode.ModeByte);
+            //modeByte.Add(andValue);
+            //modeByte.Add(0xf5);//帧尾
+            ////var t1 = string.Join("", modeByte);
+            //var t2 = CommonHelper.ByteToString(modeByte.ToArray());
+            //var text = new ScsTextMessage(t2);
+            //GatherVm.Client.SendMessage(text);
+            if (CjButtonText == "开始采集")
+            {
+                CjButtonEnable = false;
+                OnSendData(0x03, 0x02, 0x01);
+                CjButtonText = "停止采集";
+                CjButtonEnable = true;
+            }
+            else
+            {
+                CjButtonEnable = false;
+                OnSendData(0x03, 0x02, 0x00);
+                CjButtonText = "开始采集";
+                CjButtonEnable = true;
+            }
+        }
+        private void OnSendData(byte length,byte mark,byte data)
+        {
+            var modeByte = new List<byte>();
+            modeByte.Add(0x7e);//帧头
+            modeByte.Add(length);//帧长度
+            modeByte.Add(mark);//帧标识
+            modeByte.Add(data);//数据
+            //和校验
+            var andValue = (byte)(length+ mark + data);
+            modeByte.Add(andValue);
+            modeByte.Add(0xf5);//帧尾
+            //var t1 = string.Join("", modeByte);
+            var t2 = CommonHelper.ByteToString(modeByte.ToArray());
+            var text = new ScsTextMessage(t2);
+            if (GatherVm.Client.CommunicationState==TcpSocket.Scs.Communication.CommunicationStates.Connected)
+            {
+                GatherVm.Client.SendMessage(text);
+            }
+            else
+            {
+                MessageBox.Show("设备已断开连接！");
+            }
+        }
+        /// <summary>
+        /// 选中控制模式事件
+        /// </summary>
+        /// <param name="collectMode"></param>
+        private void OnSelectedMode(CollectMode  collectMode)
+        {
+            OnSendData(0x03,0x00,collectMode.ModeByte);
+            //var modeByte = new List<byte>();
+            //modeByte.Add(0x7e);//帧头
+            //modeByte.Add(0x03);//帧长度
+            //modeByte.Add(0x00);//帧标识
+            //modeByte.Add(collectMode.ModeByte);//数据
+            ////和校验
+            //var andValue =(byte)(0x30 + 0x00 + collectMode.ModeByte);
+            //modeByte.Add(andValue);
+            //modeByte.Add(0xf5);//帧尾
+            ////var t1 = string.Join("", modeByte);
+            //var t2 = CommonHelper.ByteToString(modeByte.ToArray());
+            //var text = new ScsTextMessage(t2);
+            //GatherVm.Client.SendMessage(text);
+        }
         private void OnStartRecord()
         {
             
@@ -136,7 +217,16 @@ namespace Pvirtech.QyRound.ViewModels
         public ICommand ConnectCmd { get; private set; }
         public ICommand SdkInitCmd { get; private set; }
         public ICommand StartRecordCmd { get; private set; }
+        public ICommand SelectedModeCmd { get; private set; }
+        public ICommand CjStartCmd { get; private set; }
 
+        private CollectMode _selectCollectMode;
+        public CollectMode SelectCollectMode
+        {
+            get { return _selectCollectMode; }
+            set { SetProperty(ref _selectCollectMode, value); }
+
+        }
         private GatherViewModel _gatherVm;
         public GatherViewModel GatherVm
         {
@@ -150,6 +240,18 @@ namespace Pvirtech.QyRound.ViewModels
             get { return _radioVm; }
             set { SetProperty(ref _radioVm, value); }
 
+        }
+        private string _cjbuttonText="开始采集";
+        public string  CjButtonText
+        {
+            get { return _cjbuttonText; }
+            set { SetProperty(ref _cjbuttonText, value); }
+        }        
+        private bool _cjbuttonEnable=true;
+        public bool CjButtonEnable
+        {
+            get { return _cjbuttonEnable; }
+            set { SetProperty(ref _cjbuttonEnable, value); }
         }
         private void LoadData()
 		{

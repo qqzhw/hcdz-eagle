@@ -1,5 +1,6 @@
 ﻿using Prism.Mvvm;
 using Pvirtech.QyRound.Core.Common;
+using Pvirtech.QyRound.Models;
 using Pvirtech.QyRound.Properties;
 using Pvirtech.TcpSocket.Scs.Client;
 using Pvirtech.TcpSocket.Scs.Communication;
@@ -7,6 +8,7 @@ using Pvirtech.TcpSocket.Scs.Communication.EndPoints.Tcp;
 using Pvirtech.TcpSocket.Scs.Communication.Messages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +21,19 @@ namespace Pvirtech.QyRound.ViewModels
         public RadioViewModel()
         {
             Init();
+            InitModel();
         }
+
+        private void InitModel()
+        {
+            _signals = new ObservableCollection<Signal>();
+            _signals.Add(new Signal() { Id = 0x00, Name = "阵列信号" });
+            _signals.Add(new Signal() { Id = 0x01, Name = "标校信号" });
+            _bandWidths = new ObservableCollection<BandWidth>();
+            _bandWidths.Add(new BandWidth() { Id = 0x00, Name = "2MHz" });
+            _bandWidths.Add(new BandWidth() { Id = 0x01, Name = "60MHz" });
+        }
+
         private void Init()
         {
             _spIp = Settings.Default.SpIP;
@@ -89,6 +103,19 @@ namespace Pvirtech.QyRound.ViewModels
         {
             get { return _spIp; }
             set { SetProperty(ref _spIp, value); }
+        }
+
+        private ObservableCollection<Signal> _signals;
+        public ObservableCollection<Signal> Signals
+        {
+            get { return _signals; }
+            set { SetProperty(ref _signals, value); }
+        }
+        private ObservableCollection<BandWidth> _bandWidths;
+        public ObservableCollection<BandWidth> BandWidths
+        {
+            get { return _bandWidths; }
+            set { SetProperty(ref _bandWidths, value); }
         }
         #endregion
     }
