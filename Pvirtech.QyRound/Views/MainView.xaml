@@ -1049,54 +1049,76 @@
 
         </Grid>
         <Border Grid.Row="2"   CornerRadius="5" Margin="10,2,10,5"   BorderThickness="1" BorderBrush="#BCE8F1">
-            <telerik:RadGridView x:Name="dgInfo"  telerik:StyleManager.Theme="Windows10" FontSize="14"   ShowGroupPanel="False"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <telerik:RadGridView x:Name="dgDevice" Margin="0,0,10,0" telerik:StyleManager.Theme="Windows10" FontSize="14"   ShowGroupPanel="False"
 						    RowHeight="32" CanUserInsertRows="True"    GridLinesVisibility="Horizontal" TextOptions.TextFormattingMode="Display"  IsFilteringAllowed="False" ItemsSource="{Binding DirectoryItems}"  
 							 RowIndicatorVisibility="Collapsed"  FontWeight="Medium"  SelectionUnit="FullRow"  SelectionMode="Single"     
                                  IsReadOnly="True"   SelectedItem="{Binding Path=SelectedItem,Mode=TwoWay}"    GroupRenderMode="Flat"    AutoGenerateColumns="False"  
                                          CanUserSortColumns="False"  IsBusy="{Binding IsBusy}"	 CanUserFreezeColumns="False" AlternateRowBackground="#E6F4FF"   AlternationCount="2"   >
-                <telerik:RadGridView.ContextMenu>
-                    <ContextMenu ItemsSource="{Binding Path=Menu,Mode=OneWay}"  />
-                </telerik:RadGridView.ContextMenu>
-                <telerik:EventToCommandBehavior.EventBindings>
-                    <telerik:EventBinding Command="{Binding ListRightMenue}" EventName="MouseRightButtonUp" 
+                    <telerik:RadGridView.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding Path=Menu,Mode=OneWay}"  />
+                    </telerik:RadGridView.ContextMenu>
+                    <telerik:EventToCommandBehavior.EventBindings>
+                        <telerik:EventBinding Command="{Binding ListRightMenue}" EventName="MouseRightButtonUp" 
                         PassEventArgsToCommand="True" />
-                    <telerik:EventBinding Command="{Binding DataContext.DoubleClickCmd ,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"    EventName="MouseDoubleClick" 
+                        <telerik:EventBinding Command="{Binding DataContext.DoubleClickCmd ,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"    EventName="MouseDoubleClick" 
                         PassEventArgsToCommand="True" />
-                </telerik:EventToCommandBehavior.EventBindings>
-                <telerik:RadGridView.Columns>
-                    <telerik:GridViewDataColumn  Header=""  Width="32">
-                        <telerik:GridViewDataColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding Icon}"  Width="24" Height="24"/>
-                            </DataTemplate>
-                        </telerik:GridViewDataColumn.CellTemplate>
-                        <telerik:GridViewDataColumn.CellStyle>
-                            <Style TargetType="telerik:GridViewCell">
-                                <Setter  Property="VerticalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </telerik:GridViewDataColumn.CellStyle>
-                    </telerik:GridViewDataColumn>
-                    <telerik:GridViewDataColumn Header="文件名称"  Width="1*"    HeaderTextAlignment="Justify"  TextBlock.FontWeight="SemiBold"  DataMemberBinding="{Binding  Name,Mode =TwoWay}"/>
+                    </telerik:EventToCommandBehavior.EventBindings>
+                    <telerik:RadGridView.Columns> 
+                        <telerik:GridViewDataColumn Header="设备/通道名称"   Width="*"   HeaderTextAlignment="Justify"  TextBlock.FontWeight="SemiBold"  DataMemberBinding="{Binding  Name,Mode =TwoWay}"/>
 
-                    <telerik:GridViewDataColumn Header="路径" Width="2*"    DataMemberBinding="{Binding FullName}" />
-                    <!--<telerik:GridViewDataColumn Header="路径" Width="100"    DataMemberBinding="{Binding DirectoryName}" />-->
-                    <telerik:GridViewDataColumn Header="创建时间" Width="156">
-                        <telerik:GridViewDataColumn.CellTemplate>
-                            <DataTemplate >
-                                <TextBlock Text="{Binding CreationTime,StringFormat=yyyy-MM-dd HH:mm:ss}" />
-                            </DataTemplate>
-                        </telerik:GridViewDataColumn.CellTemplate>
-                    </telerik:GridViewDataColumn>
-                    <telerik:GridViewDataColumn Header="更改时间" Width="156"  HeaderTextAlignment="Center" TextAlignment="Center" DataMemberBinding="{Binding LastWriteTime}">
+                        <telerik:GridViewDataColumn Header="设备温度/通道序号"    DataMemberBinding="{Binding FullName}" />
+                        <!--<telerik:GridViewDataColumn Header="路径" Width="100"    DataMemberBinding="{Binding DirectoryName}" />-->
+                        <telerik:GridViewDataColumn Header="磁盘剩余容量" />
+                        <telerik:GridViewDataColumn Header="磁盘总容量" />
+                        <telerik:GridViewDataColumn Header="写入速度"   HeaderTextAlignment="Center" TextAlignment="Center" DataMemberBinding="{Binding LastWriteTime}"/>
+                        <telerik:GridViewDataColumn Header="状态" DataMemberBinding="{Binding Extension}" TextWrapping="Wrap" Width="80" />
+                        
+                    </telerik:RadGridView.Columns>
 
-                    </telerik:GridViewDataColumn>
+                </telerik:RadGridView>
+                <telerik:RadGridView x:Name="dgInfo"  Margin="10,0,0,0" Grid.Column="1" telerik:StyleManager.Theme="Windows10" FontSize="14"   ShowGroupPanel="False"
+						    RowHeight="32" CanUserInsertRows="True"    GridLinesVisibility="Horizontal" TextOptions.TextFormattingMode="Display"  IsFilteringAllowed="False" ItemsSource="{Binding DirectoryItems}"  
+							 RowIndicatorVisibility="Collapsed"  FontWeight="Medium"  SelectionUnit="FullRow"  SelectionMode="Single"     
+                                 IsReadOnly="True"   SelectedItem="{Binding Path=SelectedItem,Mode=TwoWay}"    GroupRenderMode="Flat"    AutoGenerateColumns="False"  
+                                         CanUserSortColumns="False"  IsBusy="{Binding IsBusy}"	 CanUserFreezeColumns="False" AlternateRowBackground="#E6F4FF"   AlternationCount="2"   >
+                    <telerik:RadGridView.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding Path=Menu,Mode=OneWay}"  />
+                    </telerik:RadGridView.ContextMenu>
+                    <telerik:EventToCommandBehavior.EventBindings>
+                        <telerik:EventBinding Command="{Binding ListRightMenue}" EventName="MouseRightButtonUp" 
+                        PassEventArgsToCommand="True" />
+                        <telerik:EventBinding Command="{Binding DataContext.DoubleClickCmd ,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"    EventName="MouseDoubleClick" 
+                        PassEventArgsToCommand="True" />
+                    </telerik:EventToCommandBehavior.EventBindings>
+                    <telerik:RadGridView.Columns>
+                        
+                        <telerik:GridViewDataColumn Header="任务/记录"  Width="*"     HeaderTextAlignment="Justify"  TextBlock.FontWeight="SemiBold"  DataMemberBinding="{Binding  Name,Mode =TwoWay}"/>
 
-                    <telerik:GridViewDataColumn Header="类型" DataMemberBinding="{Binding Extension}" TextWrapping="Wrap" Width="80" />
-                    <telerik:GridViewDataColumn Header="大小" DataMemberBinding="{Binding LengthText}" TextWrapping="Wrap" Width="100" />
+                        <telerik:GridViewDataColumn Header="通道序号" Width="80"    DataMemberBinding="{Binding FullName}" />
+                        <!--<telerik:GridViewDataColumn Header="路径" Width="100"    DataMemberBinding="{Binding DirectoryName}" />-->
+                        <telerik:GridViewDataColumn Header="大小" DataMemberBinding="{Binding LengthText}" TextWrapping="Wrap" Width="80" />
 
-                </telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Header="创建时间" Width="160">
+                            <telerik:GridViewDataColumn.CellTemplate>
+                                <DataTemplate >
+                                    <TextBlock Text="{Binding CreationTime,StringFormat=yyyy-MM-dd HH:mm:ss}" />
+                                </DataTemplate>
+                            </telerik:GridViewDataColumn.CellTemplate>
+                        </telerik:GridViewDataColumn>
+                        <telerik:GridViewDataColumn Header="更改时间" Width="160"  HeaderTextAlignment="Center" TextAlignment="Center" DataMemberBinding="{Binding LastWriteTime}">
 
-            </telerik:RadGridView> 
+                        </telerik:GridViewDataColumn>
+
+                        
+                    </telerik:RadGridView.Columns>
+
+                </telerik:RadGridView>
+            </Grid>
         </Border> 
       
         <Canvas Grid.Row="2">

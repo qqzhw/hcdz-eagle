@@ -38,6 +38,15 @@
   <PropertyGroup>
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -129,6 +138,7 @@
     <Compile Include="Commons\CommonByte.cs" />
     <Compile Include="Commons\CommonHelper.cs" />
     <Compile Include="Commons\ModbusUtility.cs" />
+    <Compile Include="Commons\NativeMethods.cs" />
     <Compile Include="Controls\HeaderControl.cs" />
     <Compile Include="Converters\TrueToColorConverter.cs" />
     <Compile Include="Models\BandWidth.cs" />
@@ -164,6 +174,7 @@
     <Compile Include="Services\QyRoundService.cs" />
     <Compile Include="Services\IQyRoundService.cs" />
     <Compile Include="ViewModels\BanAnalysisViewModel.cs" />
+    <Compile Include="ViewModels\DeviceInfoViewModel.cs" />
     <Compile Include="ViewModels\GatherViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -172,6 +183,7 @@
     <Compile Include="ViewModels\SDKViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\SystemInfoViewModel.cs" />
+    <Compile Include="ViewModels\TaskInfoViewModel.cs" />
     <Compile Include="Views\BanAnalysisView.xaml.cs">
       <DependentUpon>BanAnalysisView.xaml</DependentUpon>
     </Compile>
@@ -241,6 +253,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

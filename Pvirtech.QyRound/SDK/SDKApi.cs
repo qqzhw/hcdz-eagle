@@ -99,15 +99,15 @@ namespace Pvirtech.QyRound.SDK
         public unsafe static extern int EagleControl_GetSystemNICs(ref eagle_all_netcards nics);
 
         [DllImport("SDK.dll", CallingConvention = CallingConvention.Cdecl)]
-        public unsafe static extern int EagleControl_SetControlNICs( eagle_all_netcards nics);
+        public unsafe static extern int EagleControl_SetControlNICs( ref eagle_all_netcards nics);
 
         [DllImport("SDK.dll",CharSet =CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern int EagleControl_ScanAndGetDeviceNum(ref int device_num);
 
         [DllImport("SDK.dll", CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern int EagleControl_GetDeviceNum();
-        [DllImport("SDK.dll", CallingConvention = CallingConvention.Cdecl)]
-        public unsafe static extern int EagleControl_GetDeviceIds(ref int[] id_array,   int array_size, ref int actual_ids);
+        [DllImport("SDK.dll")]
+        public unsafe static extern int EagleControl_GetDeviceIds(IntPtr[] id_array,   int array_size, ref int actual_ids);
 
         [DllImport("SDK.dll", CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern int EagleControl_GetCurrentControlNIC(  int device_id,  ref eagle_netcard_info netcard);

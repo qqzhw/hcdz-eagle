@@ -86,7 +86,7 @@ namespace Pvirtech.QyRound.ViewModels
             //        memcpy(&set_nics.cards[set_nics.card_num++], &nics.cards[num - 1], sizeof(eagle_netcard_info));
             //    }
             //}
-            ret = SDKApi.EagleControl_SetControlNICs(nics);
+            //ret = SDKApi.EagleControl_SetControlNICs(ref nics);
             //printf("set control netcards:\n");
             //for (int i = 0; i < set_nics.card_num; i++)
             //{
@@ -103,18 +103,19 @@ namespace Pvirtech.QyRound.ViewModels
             */
             int[] device_ids = new int[device_num];
             int ids = 0;
-            ret = SDKApi.EagleControl_GetDeviceIds(ref device_ids, device_num, ref ids);
-            LogHelper.WriteLog("get device ids:\n");
-            for (int i = 0; i < ids; i++)
-            {
-                LogHelper.WriteLog(string.Format(" ** {0}: device id {1}\n", i + 1, device_ids[i]));
-            }
+            //ret = SDKApi.EagleControl_GetDeviceIds(out device_ids, device_num, ref ids);
+            //LogHelper.WriteLog("get device ids:\n");
+            //for (int i = 0; i < ids; i++)
+            //{
+            //    LogHelper.WriteLog(string.Format(" ** {0}: device id {1}\n", i + 1, device_ids[i]));
+            //}
             /*
             * init data api
              */
             var initdevice = SDKApi.EagleData_Init();
             LogHelper.WriteLog(string.Format("init eagle data {0}", initdevice));
-
+            
+            
         }
 
         private void OnConnectedDevice()

@@ -2,6 +2,7 @@
 using Pvirtech.QyRound.Core.Common;
 using Pvirtech.QyRound.Models;
 using Pvirtech.QyRound.Properties;
+using Pvirtech.QyRound.SDK;
 using Pvirtech.TcpSocket.Scs.Client;
 using Pvirtech.TcpSocket.Scs.Communication;
 using Pvirtech.TcpSocket.Scs.Communication.EndPoints.Tcp;
@@ -22,6 +23,8 @@ namespace Pvirtech.QyRound.ViewModels
         {
             Init();
             InitModel();
+            string temp_time = "20091225091010";
+            string results = DateTime.ParseExact(temp_time, "yyyyMMddHHmmss", null).ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         private void InitModel()
@@ -78,7 +81,30 @@ namespace Pvirtech.QyRound.ViewModels
             }
 
         }
-
+        /// <summary>
+        /// 格式化数据
+        /// </summary>
+        /// <param name="deviceId"></param>
+        public void ReinitDisk(int deviceId)
+        {
+            SDKApi.EagleControl_ReinitDisk(deviceId);
+        }
+        /// <summary>
+        /// 格式化磁盘
+        /// </summary>
+        /// <param name="deviceId"></param>
+        public void FormatDisk(int deviceId)
+        {
+            SDKApi.EagleControl_ReformatDisk(deviceId);
+        }
+        /// <summary>
+        ///  恢复到出厂设置。
+        /// </summary>
+        /// <param name="deviceId"></param>
+        public void RestoreConfig(int deviceId)
+        {
+            SDKApi.EagleControl_RestoreConfig(deviceId);
+        }
         private void OnMessageReceived(object sender, MessageEventArgs e)
         {
             var message = e.Message as ScsTextMessage;

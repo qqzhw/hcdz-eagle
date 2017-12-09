@@ -74,33 +74,57 @@
         <!--<Button Style="{StaticResource MetroFlatButton}" Command="{Binding SaveCommand}" Width="120" Height="26"  Content="保存"/>-->
         <Border Grid.Row="1"   Margin="10,10,10,0"     BorderThickness="1" BorderBrush="#BCE8F1"     CornerRadius="5">
             <Grid  Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="42"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Border Background="#D9EDF7">
-                    <Grid>
-                        <TextBlock Text="以太网TCP/IP数据测试" FontSize="16" Foreground="#31708F" VerticalAlignment="Center" Margin="20,0,0,0"/>
-
-                    </Grid>
-                </Border>
+                
                 <Border BorderThickness="1" BorderBrush="#D9EDF7" Margin="0,0,0,5" Grid.Row="1">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-                            <Label Content="  服务端地址"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                            <TextBox  Margin="2,0,0,0" Text="{Binding SignalrServer}"  Width="200" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-                            <Label Content="默认下载目录"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                            <TextBox  Margin="2,0,0,0" Text="{Binding LocalPath}" Width="300" />
+                    <telerik:RadTabControl Grid.Row="1" Background="White" telerik:StyleManager.Theme="Office2016Touch" VerticalAlignment="Top"
+				DisplayMemberPath="Content"  ScrollMode="Viewport" BorderThickness="0">
+                        <telerik:RadTabItem Header="通讯方式选择">
+                            <telerik:RadTabItem.Content>
+                                <TextBlock Text="saad"/>
+                            </telerik:RadTabItem.Content>
+                        </telerik:RadTabItem>
+                        <telerik:RadTabItem   Header="系统设置">
+                            <telerik:RadTabItem.Content>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="任务名称"/>
+                                        <TextBox Width="250" Text="3333"/>
+                                    </StackPanel>
+                                    <telerik:RadGridView x:Name="dgInfo" Grid.Row="1" telerik:StyleManager.Theme="Windows10" FontSize="14"   ShowGroupPanel="False"
+						    RowHeight="32" CanUserInsertRows="True"    GridLinesVisibility="Horizontal" TextOptions.TextFormattingMode="Display"  IsFilteringAllowed="False" ItemsSource="{Binding DirectoryItems}"  
+							 RowIndicatorVisibility="Collapsed"  FontWeight="Medium"  SelectionUnit="FullRow"  SelectionMode="Single"     
+                                 IsReadOnly="True"   SelectedItem="{Binding Path=SelectedItem,Mode=TwoWay}"    GroupRenderMode="Flat"    AutoGenerateColumns="False"  
+                                         CanUserSortColumns="False"  IsBusy="{Binding IsBusy}"	 CanUserFreezeColumns="False" AlternateRowBackground="#E6F4FF"   AlternationCount="2"   >
+                                      
+                                        <telerik:RadGridView.Columns>
+                                            <telerik:GridViewDataColumn Header="设备名称"  Width="1*"    HeaderTextAlignment="Justify"  TextBlock.FontWeight="SemiBold"  DataMemberBinding="{Binding  Name,Mode =TwoWay}"/>
+                                            <telerik:GridViewDataColumn Header="磁盘报警阈值（GB）" Width="2*"    DataMemberBinding="{Binding FullName}" />
+                                            <!--<telerik:GridViewDataColumn Header="路径" Width="100"    DataMemberBinding="{Binding DirectoryName}" />-->
+                                            <telerik:GridViewDataColumn Header="存储模式（循环/正常）" Width="156"/>
+                                        </telerik:RadGridView.Columns>
 
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  Margin="20,10,0,0">
-                            <Label Content="远程下载地址"  VerticalAlignment="Center" Margin="5,0,0,0"/>
-                            <TextBox  Margin="2,0,0,0" Text="{Binding DownloadUrl}" Width="360" />
-                            
-                        </StackPanel>
-                    </StackPanel>
+                                    </telerik:RadGridView>
+
+                                </Grid>
+                            </telerik:RadTabItem.Content>
+                        </telerik:RadTabItem>
+                        <telerik:RadTabItem Header="磁盘映射设置">
+                            <telerik:RadTabItem.Content>
+                                <TextBlock Text="磁盘映射设置"/>
+                            </telerik:RadTabItem.Content>
+                        </telerik:RadTabItem>
+                        <telerik:RadTabItem DropDownContent="N - Q" Header="设备相机名称">
+                            <telerik:RadTabItem.Content>
+                                <TextBlock Text="saad"/>
+                            </telerik:RadTabItem.Content>
+                        </telerik:RadTabItem>
+                        
+                         
+                    </telerik:RadTabControl>
                 </Border>
             </Grid>
         </Border>

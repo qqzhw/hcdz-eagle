@@ -12,6 +12,7 @@ using Pvirtech.TcpSocket.Scs.Communication.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -159,11 +160,20 @@ namespace Pvirtech.QyRound.ViewModels
         }
         private void OnStartRecord()
         {
-            
+           
         }
 
         private void OnSDKInit()
         {
+            /*
+           * init data api
+            */
+            var initdevice = SDKApi.EagleData_Init();
+            LogHelper.WriteLog(string.Format("init eagle data {0}", initdevice));
+            if (initdevice > 5000)
+            {
+                MessageBox.Show("初始化设备失败" + initdevice.ToString());
+            }
             //获取存储SDK 版本
             int major = 0, minor = 0;
             //SetConsoleCtrlHandler(CosonleHandler, TRUE);
@@ -200,7 +210,12 @@ namespace Pvirtech.QyRound.ViewModels
             //        memcpy(&set_nics.cards[set_nics.card_num++], &nics.cards[num - 1], sizeof(eagle_netcard_info));
             //    }
             //}
-            ret = SDKApi.EagleControl_SetControlNICs(nics);
+            var infoList = new eagle_netcard_info[10];
+            infoList[0] = nics.cards[0];
+            var setnice = new eagle_all_netcards();
+            setnice.card_num = 1; 
+            setnice.cards = infoList; 
+            ret = SDKApi.EagleControl_SetControlNICs(ref nics);
             //printf("set control netcards:\n");
             //for (int i = 0; i < set_nics.card_num; i++)
             //{
@@ -209,6 +224,7 @@ namespace Pvirtech.QyRound.ViewModels
             /*
             * get device number
             */
+            
             int device_num = 0;
             ret = SDKApi.EagleControl_ScanAndGetDeviceNum(ref device_num);
             LogHelper.WriteLog(string.Format("get device numbers {0}", device_num));
@@ -216,23 +232,38 @@ namespace Pvirtech.QyRound.ViewModels
             /*
             * get device ids
             */
-            int[] device_ids = new int[device_num];
+            try
+            {
+
+            
+            IntPtr[] device_ids=new IntPtr[device_num];
             int ids = 0;
-            ret = SDKApi.EagleControl_GetDeviceIds(ref device_ids, device_num, ref ids);
-            LogHelper.WriteLog("get device ids:\n");
+            
+            ret = SDKApi.EagleControl_GetDeviceIds( device_ids, 1, ref ids);
+            LogHelper.WriteLog(string.Format("get device ids {0}:\n",ret));
             for (int i = 0; i < ids; i++)
             {
-                LogHelper.WriteLog(string.Format(" ** {0}: device id {1}\n", i + 1, device_ids[i]));
+               // LogHelper.WriteLog(string.Format(" ** {0}: device id {1}\n", i + 1, device_ids[i]));
             }
-            var s = SDKApi.EagleControl_StartRecord(1, 0, 0, 0);
-            /*
-            * init data api
-             */
-            var initdevice = SDKApi.EagleData_Init();
-            LogHelper.WriteLog(string.Format("init eagle data {0}", initdevice));
-            if (initdevice>5000)
+              //  object e = null;
+              
+              Marshal.PtrToStructure(device_ids[0],typeof(int[]));
+
+                var str = SDKApi.EagleControl_StartRecord(2, 0, 0, 0);
+                if (str == 0)
+                {
+                    MessageBox.Show("正在读取");
+
+                }
+                else
+                {
+                    MessageBox.Show(str.ToString());
+                }
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("初始化设备失败" + initdevice.ToString());
+                LogHelper.ErrorLog(ex);
+               
             }
         }
 
